@@ -17,10 +17,18 @@ def create_folder_and_files():
         for file in files:
             file_path = os.path.join(folder_name, file)
 
-            # Add the comment template to code.py
+            # Add the comment template + I/O boilerplate to code.py
             if file == "code.py":
+                template = (
+                    f'"""\n{provider}\n{problem_link}\n"""\n\n'
+                    "import sys\n"
+                    "import os\n\n"
+                    "script_dir = os.path.dirname(os.path.abspath(__file__))\n\n"
+                    'sys.stdin = open(os.path.join(script_dir, "input.txt"), "r")\n'
+                    'sys.stdout = open(os.path.join(script_dir, "output.txt"), "w")\n\n'
+                )
                 with open(file_path, "w") as f:
-                    f.write(f'"""\n{provider}\n{problem_link}\n"""\n\n')
+                    f.write(template)
             else:
                 with open(file_path, "w"):
                     pass
