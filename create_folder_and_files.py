@@ -2,8 +2,10 @@ import os
 
 
 def create_folder_and_files():
-    # Get folder name from user
+    # Get details from user
     folder_name = input("Enter the folder name: ")
+    provider = input("Enter the provider (codeforces, codechef, leetcode, etc.): ")
+    problem_link = input("Enter the problem statement link: ")
 
     try:
         # Create the folder
@@ -14,15 +16,15 @@ def create_folder_and_files():
         files = ["code.py", "input.txt", "output.txt"]
         for file in files:
             file_path = os.path.join(folder_name, file)
-            
+
             # Add the comment template to code.py
             if file == "code.py":
                 with open(file_path, "w") as f:
-                    f.write(f'"""\nhttps://www.codechef.com/problems/{folder_name}\n"""\n\n')
+                    f.write(f'"""\n{provider}\n{problem_link}\n"""\n\n')
             else:
                 with open(file_path, "w"):
                     pass
-                    
+
             print(f"File '{file}' created successfully!")
 
     except Exception as e:
